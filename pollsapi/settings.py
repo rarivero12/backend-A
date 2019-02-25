@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'qcl7=l^q%4(1@gz_)=g)5-_g4je-1nv02^)y*d6-2lj-@(eb%k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 CORS_ORIGIN_ALLOW_ALL=True
 
@@ -90,15 +90,17 @@ WSGI_APPLICATION = 'pollsapi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'database',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
+        'USER': 'name',
+        'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT' : 5432,
+        'PORT' : '',
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 #Correo
 
